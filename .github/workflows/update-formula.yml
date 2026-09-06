@@ -38,5 +38,9 @@ jobs:
         shell: bash
         run: ./update-formula.sh
         env:
+          # gh does not read the automatic GITHUB_TOKEN variable — it needs
+          # GH_TOKEN explicitly (the push itself needs no token handling:
+          # actions/checkout configures the origin URL with credentials).
+          GH_TOKEN: ${{ github.token }}
           UPSTREAM_REPO: Asunachi/git-cleanup
           BRANCH: ${{ github.ref_name }}
